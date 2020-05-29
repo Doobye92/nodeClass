@@ -1,15 +1,12 @@
-var express = require("express"); // 설치한 express module을 불러와서 변수에 담는다
-var app = express(); // express를 실행하여 app object를 초기화 한다.
+var express = require("express");
+var app = express();
 
-app.get("/", function (req, res) {
-    // 서버에 get 요청이 있는 경우
-    // '/' 위치에 get요청을 받는 경우,  - 이 함수를 이벤트 리스너라고 함
-    res.send(`Hello world!`); // 헬로 월드를 출력한다.
-});
+app.use(express.static(__dirname + "/public")); // 1
+// .use() 메서드는 서버에 요청이 올 때마다 무조건 콜백함수가 실행됨
+// __dirname은 node.js에서 프로그램이 실행중인 파일의 위치를 나타내는 글로벌 변수임.
+// >> 위의 코드는 '현재_위치/public' route를 static폴더로 지정하라는 명령어
 
-var port = 3000; // 사용할 포트 번호를 port 변수에 넣는다.
+var port = 3000;
 app.listen(port, function () {
-    // listen은 서버가 실행되는 경우에 동작함 - 이 함수를 이벤트 리스너라고 함
-    // port 변수를 이용하여 3000번 포트에 node.js서버를 연결
-    console.log(`server on! http://localhost` + port); // 서버가 실행되면 콘솔창에 메시지를 표시
+    console.log(`server on! http://localhost` + port);
 });
